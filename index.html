@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>911cards.com</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 650px;
+            width: 100%;
+            backdrop-filter: blur(5px);
+        }
+        h2 {
+            color: #d32f2f;
+            margin-top: 0;
+            font-weight: 600;
+            text-align: center;
+        }
+        p.intro {
+            color: #666;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin: 15px 0;
+            position: relative;
+        }
+        label {
+            display: block;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            border-color: #d32f2f;
+            outline: none;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            background: #d32f2f;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+        }
+        #cardPreview {
+            margin-top: 30px;
+            width: 350px;
+            height: 220px;
+            border: none;
+            padding: 15px;
+            background: linear-gradient(45deg, #fff 0%, #f9f9f9 100%);
+            font-size: 12px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        .emergency-header {
+            color: #d32f2f;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .photo-container {
+            width: 80px;
+            height: 100px;
+            margin-left: 15px;
+            overflow: hidden;
+            background: #eee;
+            order: 2;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        #previewPhoto {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .info-container {
+            flex-grow: 1;
+            order: 1;
+            padding-right: 10px;
+        }
+        .info-container p {
+            margin: 4px 0;
+            color: #333;
+            line-height: 1.4;
+        }
+        .info-container strong {
+            color: #d32f2f;
+        }
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .footer a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>911cards.com</h2>
+        <p class="intro">Create a stylish wallet-sized card with your vital information</p>
+        
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+            <label for="birth">Blood Type</label>
+            <input type="text" id="blood" placeholder="e.g., O+">
+        </div>
+        
+        <div class="form-group">
+            <label for="allergies">Allergies</label>
+            <input type="text" id="allergies" placeholder="e.g., Penicillin, Peanuts">
+        </div>
+        
+        <div class="form-group">
+            <label for="conditions">Medical Conditions</label>
+            <input type="text" id="conditions" placeholder="e.g., Diabetes, Asthma">
+        </div>
+        
+        <div class="form-group">
+            <label for="contact">Emergency Contact</label>
+            <input type="text" id="contact" placeholder="Name - Phone Number">
+        </div>
+        
+        <div class="form-group">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" placeholder="e.g., Current medications, special instructions"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="photo">Your Photo</label>
+            <input type="file" id="photo" accept="image/*">
+        </div>
+        
+        <div class="button-group">
+            <button onclick="generateCard()">Generate Card</button>
+            <button onclick="downloadCard()">Download as Image</button>
+        </div>
+        
+        <div id="cardPreview">
+            <div class="info-container"></div>
+            <div class="photo-container">
+                <img id="previewPhoto" src="" alt="Your Photo">
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Adamo Group Holdings Ltd. Co.</p>
+            <p>Comments & Suggestions: <a href="mailto:aghlc.nm@gmail.com">aghlc.nm@gmail.com</a></p>
+        </div>
+    </div>
+
+    <script>
+        let photoDataUrl = '';
+
+        document.getElementById('photo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photoDataUrl = e.target.result;
+                    document.getElementById('previewPhoto').src = photoDataUrl;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function generateCard() {
+            const name = document.getElementById('name').value || 'Not Provided';
+            const blood = document.getElementById('blood').value || 'Not Provided';
+            const allergies = document.getElementById('allergies').value || 'None';
+            const conditions = document.getElementById('conditions').value || 'None';
+            const contact = document.getElementById('contact').value || 'Not Provided';
+            const notes = document.getElementById('notes').value || 'None';
+
+            const card = document.getElementById('cardPreview');
+            const infoContainer = card.querySelector('.info-container');
+            card.style.display = 'flex';
+            
+            if (photoDataUrl) {
+                document.getElementById('previewPhoto').src = photoDataUrl;
+            } else {
+                document.getElementById('previewPhoto').src = '';
+            }
+
+            infoContainer.innerHTML = `
+                <div class="emergency-header">Emergency Information</div>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Blood Type:</strong> ${blood}</p>
+                <p><strong>Allergies:</strong> ${allergies}</p>
+                <p><strong>Conditions:</strong> ${conditions}</p>
+                <p><strong>Contact:</strong> ${contact}</p>
+                <p><strong>Notes:</strong> ${notes}</p>
+            `;
+        }
+
+        function downloadCard() {
+            const card = document.getElementById('cardPreview');
+            if (card.style.display === 'none') {
+                alert('Please generate a card first!');
+                return;
+            }
+
+            html2canvas(card).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'emergency_card.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
